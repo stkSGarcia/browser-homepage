@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title"></title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        text-align: center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    #logo {
+        height: 6rem;
+        margin-top: 1.25rem;
+        animation: flipInX 4s;
+        -webkit-animation: flipInX 4s;
+    }
+
+    #search_bar {
+        position: relative;
+        width: 90%;
+        height: 3rem;
+        margin: 1rem auto;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 0.3rem;
+        box-shadow: 0 0 1rem #9e9e9e;
+        z-index: 100;
+        animation: fadeIn 2.5s;
+        -webkit-animation: fadeIn 2.5s;
+    }
+
+    #search_submit {
+        float: right;
+        width: 10%;
+        height: 100%;
+        padding: 0 4% 0 1%;
+        color: #212121;
+        background-color: transparent;
+        font-size: 1.25rem;
+        border: none;
+        border-radius: 0.3rem;
+        outline: 0;
+    }
+
+    #clear {
+        display: none;
+        float: right;
+        width: 5%;
+        height: 100%;
+        background: url("img/remove.png") no-repeat center;
+        background-size: 1rem;
+        outline: 0;
+    }
+
+    #search_input {
+        display: block;
+        position: absolute;
+        width: 82%;
+        height: 100%;
+        padding: 0 0.25rem;
+        color: #212121;
+        background-color: transparent;
+        border: none;
+        font-size: 1.25rem;
+        outline: 0;
+    }
+
+    #suggest {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 2.7rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 0 0 0.3rem 0.3rem;
+        box-shadow: 0 0.3rem 1rem #9e9e9e;
+        line-height: 2rem;
+    }
+
+    #suggest ul div {
+        height: 2rem;
+        padding: 0.3rem 0;
+    }
+
+    #suggest li {
+        float: left;
+        text-align: left;
+        padding-left: 0.6rem;
+        border-radius: 0.3rem;
+        list-style-type: none;
+    }
+
+    #suggest li:active {
+        background: #eeeeee;
+    }
+
+    #suggest b {
+        float: right;
+        width: 2rem;
+        height: 2rem;
+        background: transparent url("img/choose.png") no-repeat scroll center;
+        background-size: 0.7rem;
+        border-radius: 100%;
+    }
+
+    #close {
+        text-align: right;
+        padding: 0.4rem 1rem;
+        color: #9e9e9e;
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+
+    #bookmark {
+        padding: 0 1rem;
+    }
+
+    .box {
+        display: inline-block;
+        position: relative;
+        margin: 0.3rem;
+        text-decoration: none;
+        animation: fadeInDown 1s;
+        -webkit-animation: fadeInDown 1s;
+    }
+
+    .icon {
+        width: 3rem;
+        height: 3rem;
+        margin: 0.2rem auto;
+        color: rgba(60, 60, 60, 0.8);
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 0.3rem;
+        box-shadow: 0 0 1rem #9e9e9e;
+        font-size: 1.5rem;
+        line-height: 3rem;
+    }
+
+    .url {
+        width: 4rem;
+        height: 1rem;
+        padding: 0.2rem 0;
+        line-height: 1rem;
+        color: #f5f5f5;
+        -webkit-text-stroke: 0.01rem #000000;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #motto {
+        margin: 0.5rem 0;
+        color: #eeeeee;
+        -webkit-text-stroke: 0.02rem #000000;
+        animation: fadeInDown 1s;
+        -webkit-animation: fadeInDown 1s;
+    }
+
+    #label {
+        margin-bottom: 0.5rem;
+        padding: 0 1rem;
+        color: #eeeeee;
+        -webkit-text-stroke: 0.01rem #000000;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        animation: fadeInDown 1s;
+        -webkit-animation: fadeInDown 1s;
+    }
+
+    @-webkit-keyframes flipInX {
+        0% {
+            -webkit-transform: perspective(400px) rotateX(90deg);
+            transform: perspective(400px) rotateX(90deg);
+            opacity: 0
+        }
+
+        40% {
+            -webkit-transform: perspective(400px) rotateX(-10deg);
+            transform: perspective(400px) rotateX(-10deg)
+        }
+
+        70% {
+            -webkit-transform: perspective(400px) rotateX(10deg);
+            transform: perspective(400px) rotateX(10deg)
+        }
+
+        100% {
+            -webkit-transform: perspective(400px) rotateX(0deg);
+            transform: perspective(400px) rotateX(0deg);
+            opacity: 1
+        }
+    }
+
+    @keyframes flipInX {
+        0% {
+            -webkit-transform: perspective(400px) rotateX(90deg);
+            -ms-transform: perspective(400px) rotateX(90deg);
+            transform: perspective(400px) rotateX(90deg);
+            opacity: 0
+        }
+
+        40% {
+            -webkit-transform: perspective(400px) rotateX(-10deg);
+            -ms-transform: perspective(400px) rotateX(-10deg);
+            transform: perspective(400px) rotateX(-10deg)
+        }
+
+        70% {
+            -webkit-transform: perspective(400px) rotateX(10deg);
+            -ms-transform: perspective(400px) rotateX(10deg);
+            transform: perspective(400px) rotateX(10deg)
+        }
+
+        100% {
+            -webkit-transform: perspective(400px) rotateX(0deg);
+            -ms-transform: perspective(400px) rotateX(0deg);
+            transform: perspective(400px) rotateX(0deg);
+            opacity: 1
+        }
+    }
+
+    @-webkit-keyframes fadeIn {
+        0% {
+            opacity: 0
+        }
+
+        100% {
+            opacity: 1
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0
+        }
+
+        100% {
+            opacity: 1
+        }
+    }
+
+    @-webkit-keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(-20px);
+            transform: translateY(-20px)
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0)
+        }
+    }
+
+    @keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(-20px);
+            -ms-transform: translateY(-20px);
+            transform: translateY(-20px)
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0)
+        }
+    }
+</style>
+<body id="bg" background="bg/bg1.png">
+<a href="history://">
+    <img id="logo" src="logo/logo1.png"/>
+</a>
+<form id="search_bar" onsubmit="return search()">
+    <input id="search_submit" type="submit" value="🔄">
+    <i id="clear" onclick="clearSearch()"></i>
+    <input id="search_input" class="search" type="text" placeholder="(๑•̀ㅂ•́)و✧" onkeyup="getSuggest()"
+           onfocus="getSuggest()" autocomplete="off">
+    <div id="suggest">
+        <ul id="suggest_list"></ul>
+        <div id="close" onclick="closeSuggest()">⬆收起⬆</div>
+    </div>
+</form>
+<div id="bookmark"></div>
+<h3 id="motto">忘语</h3>
+<script src="https://api.lwl12.com/hitokoto/main/get?encode=js&charset=utf-8"></script>
+<div id="label">
+    <script>lwlhitokoto()</script>
+</div>
+</body>
+<script>
+    var num_bg = 35;
+    var num_logo = 37;
+    var query = 'https://www.baidu.com/s?wd=';
+    var bookmarks = [
+        ['昆山掌上公交', 'http://wap.ksbus.com.cn/mapHome'],
+        ['百度云', 'http://yun.baidu.com/wap/home'],
+        ['有道词典', 'http://m.youdao.com'],
+        ['新浪微博', 'http://m.weibo.cn'],
+        ['SiteD', 'http://sited.ka94.com']
+    ];
+
+    function getTitle() {
+        var time = new Date().getHours();
+        var title = document.getElementById('title');
+        if (time < 5)
+            title.innerHTML = 'Go to sleep!';
+        else if (time < 12)
+            title.innerHTML = 'Good morning!';
+        else if (time < 19)
+            title.innerHTML = 'Good afternoon!';
+        else
+            title.innerHTML = 'Good evening!';
+    }
+
+    function setBg() {
+        var bg = new Date().getSeconds();
+        bg = bg - parseInt(bg / num_bg) * num_bg + 1;
+        document.getElementById('bg').background = 'bg/bg' + bg + '.png';
+    }
+
+    function setLogo() {
+        var logo = new Date().getSeconds();
+        logo = logo - parseInt(logo / num_logo) * num_logo + 1;
+        document.getElementById('logo').src = 'logo/logo' + logo + '.png';
+    }
+
+    var last_keyword = '';
+
+    function search() {
+        if (document.getElementById('search_input').value != '') {
+            window.location.href = query + encodeURIComponent(document.getElementById('search_input').value);
+            document.getElementById('search_input').value = '';
+        }
+        return false;
+    }
+
+    function getSuggest() {
+        var keyword = document.getElementById('search_input').value;
+        var clear = document.getElementById('clear');
+        if (keyword == last_keyword) return;
+        last_keyword = keyword;
+        if (!keyword || keyword.length < 1) {
+            clear.style.display = 'none';
+            closeSuggest();
+            return;
+        }
+        clear.style.display = 'block';
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'http://sugs.m.sm.cn/web?t=w&uc_param_str=dnnwnt&scheme=http&fr=android&bid=1&q=' + encodeURIComponent(keyword) + '&_=' + new Date().getTime() + '&callback=jsonp3';
+        var head = document.querySelector('head');
+        script.onload = function () {
+            head.removeChild(script)
+        };
+        head.appendChild(script)
+    }
+
+    function jsonp3(res) {
+        var suggest = document.getElementById('suggest');
+        if (!res.r || !res.r.length) {
+            suggest.style.display = 'none';
+            return;
+        }
+        var html = '';
+        res.r.forEach(function (v) {
+            html += '<div><li onclick="suggestClick(this)">' + v.w + '</li><b onclick="continueSuggest(this)"></b></div>';
+        });
+        document.getElementById('suggest_list').innerHTML = html;
+        suggest.style.display = 'block';
+    }
+
+    function suggestClick(elem) {
+        document.getElementById('search_input').value = elem.textContent;
+        closeSuggest();
+        search();
+    }
+
+    function continueSuggest(elem) {
+        var input = document.getElementById('search_input');
+        input.value = elem.parentNode.firstChild.textContent;
+        input.focus();
+    }
+
+    function clearSearch() {
+        document.getElementById('clear').style.display = 'none';
+        closeSuggest();
+        var input = document.getElementById('search_input');
+        input.value = '';
+        input.focus();
+    }
+
+    function closeSuggest() {
+        last_keyword = '';
+        document.getElementById('suggest').style.display = 'none';
+    }
+
+    function generateBookmark() {
+        var list = document.getElementById('bookmark');
+        var html = '';
+        for (var i = 0; i < bookmarks.length; i++) {
+            html += '<a class="box" href="' + bookmarks[i][1] + '"><p class="icon">' + bookmarks[i][0].charAt(0) + '</p><p class="url">' + bookmarks[i][0] + '</p></a>'
+        }
+        list.innerHTML = html;
+    }
+
+    window.onload = function () {
+        getTitle();
+        setBg();
+        setLogo();
+        generateBookmark();
+    };
+</script>
+</html>
