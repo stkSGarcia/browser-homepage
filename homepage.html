@@ -305,10 +305,7 @@
 </form>
 <div id="bookmark"></div>
 <h3 id="motto">忘语</h3>
-<script src="https://api.lwl12.com/hitokoto/main/get?encode=js&charset=utf-8"></script>
-<div id="label">
-    <script>lwlhitokoto()</script>
-</div>
+<div id="label"></div>
 </body>
 <script>
     var num_bg = 35;
@@ -421,11 +418,20 @@
         list.innerHTML = html;
     }
 
+    function getMotto() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://api.lwl12.com/hitokoto/main/get?encode=js&charset=utf-8';
+        script.innerHTML = 'lwlhitokoto()';
+        document.getElementById('label').appendChild(script);
+    }
+
     window.onload = function () {
         getTitle();
         setBg();
         setLogo();
         generateBookmark();
+        getMotto();
     };
 </script>
 </html>
