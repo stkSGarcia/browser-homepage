@@ -289,9 +289,9 @@
         }
     }
 </style>
-<body id="bg" background="bg/bg1.png">
-<a href="history://">
-    <img id="logo" src="logo/logo1.png"/>
+<body id="bg">
+<a href="folder://">
+    <img id="logo"/>
 </a>
 <form id="search_bar" onsubmit="return search()">
     <input id="search_submit" type="submit" value="🔄">
@@ -318,8 +318,7 @@
         ['昆山掌上公交', 'http://wap.ksbus.com.cn/mapHome'],
         ['百度云', 'http://yun.baidu.com/wap/home'],
         ['有道词典', 'http://m.youdao.com'],
-        ['新浪微博', 'http://m.weibo.cn'],
-        ['SiteD', 'http://sited.ka94.com']
+        ['新浪微博', 'http://m.weibo.cn']
     ];
 
     function getTitle() {
@@ -336,15 +335,11 @@
     }
 
     function setBg() {
-        var bg = new Date().getSeconds();
-        bg = bg - parseInt(bg / num_bg) * num_bg + 1;
-        document.getElementById('bg').background = 'bg/bg' + bg + '.png';
+        document.getElementById('bg').background = 'bg/bg' + Math.ceil(Math.random() * num_bg) + '.png';
     }
 
     function setLogo() {
-        var logo = new Date().getSeconds();
-        logo = logo - parseInt(logo / num_logo) * num_logo + 1;
-        document.getElementById('logo').src = 'logo/logo' + logo + '.png';
+        document.getElementById('logo').src = 'logo/logo' + Math.ceil(Math.random() * num_logo) + '.png';
     }
 
     var last_keyword = '';
