@@ -297,7 +297,7 @@
     <input id="search_submit" type="submit" value="🔄">
     <i id="clear" onclick="clearSearch()"></i>
     <input id="search_input" class="search" type="text" placeholder="(๑•̀ㅂ•́)و✧" onkeyup="getSuggest()"
-           onfocus="getSuggest()" autocomplete="off">
+           onfocus="getSuggest()" onpaste="getSuggest()" autocomplete="off">
     <div id="suggest">
         <ul id="suggest_list"></ul>
         <div id="close" onclick="closeSuggest()">⬆收起⬆</div>
@@ -306,7 +306,6 @@
 <div id="bookmark"></div>
 <h3 id="motto">忘语</h3>
 <div id="label"></div>
-</body>
 <script>
     var num_bg = 35;
     var num_logo = 37;
@@ -419,11 +418,16 @@
     }
 
     function getMotto() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://api.lwl12.com/hitokoto/main/get?encode=js&charset=utf-8';
-        script.innerHTML = 'lwlhitokoto()';
-        document.getElementById('label').appendChild(script);
+        var request = new XMLHttpRequest();
+        request.open("GET", "https://api.lwl12.com/hitokoto/main/get?charset=utf-8", true);
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    document.getElementById('label').innerHTML = request.responseText;
+                }
+            }
+        };
+        request.send(null);
     }
 
     window.onload = function () {
@@ -434,4 +438,5 @@
         getMotto();
     };
 </script>
+</body>
 </html>
