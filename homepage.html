@@ -11,6 +11,10 @@
         margin: 0;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     body {
         text-align: center;
         background-size: 100%;
@@ -138,7 +142,6 @@
         display: inline-block;
         position: relative;
         margin: 0.3rem;
-        text-decoration: none;
         animation: fadeInDown 1s;
         -webkit-animation: fadeInDown 1s;
     }
@@ -304,8 +307,10 @@
     </div>
 </form>
 <div id="bookmark"></div>
-<h3 id="motto">忘语</h3>
-<div id="label"></div>
+<a href="history://">
+    <h3 id="motto">忘语</h3>
+    <p id="label"></p>
+</a>
 <script>
     var num_bg = 35;
     var num_logo = 37;
